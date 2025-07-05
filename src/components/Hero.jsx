@@ -1,7 +1,41 @@
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  IconButton,
+} from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import PauseIcon from "@mui/icons-material/Pause";
+import { useRef, useState } from "react";
 
 const Hero = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const desktopImage = "/images/1.jpg";
+  const mobileImage = "/images/test6.jpg";
+
+  const audioRef = useRef(null);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch((error) => {
+        console.error("No se pudo reproducir el audio:", error);
+      });
+    }
+
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <Box
       sx={{
@@ -10,7 +44,7 @@ const Hero = () => {
         width: "100vw",
         margin: 0,
         padding: 0,
-        backgroundImage: `url('/images/1.jpg')`,
+        backgroundImage: `url(${isMobile ? mobileImage : desktopImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -84,7 +118,32 @@ const Hero = () => {
         </Box>
       </Box>
 
-     
+      {/* Botón de música */}
+      <IconButton
+        onClick={toggleAudio}
+        sx={{
+          position: "absolute",
+          top: 20,
+          right: 20,
+          zIndex: 3,
+          backgroundColor: "rgba(255,255,255,0.7)",
+          color: "#000",
+          width: 50,
+          height: 50,
+          borderRadius: "50%",
+          boxShadow: 2,
+          "&:hover": {
+            backgroundColor: "rgba(255,255,255,0.9)",
+          },
+        }}
+      >
+        {isPlaying ? <PauseIcon /> : <MusicNoteIcon />}
+      </IconButton>
+
+      {/* Audio element */}
+      <audio ref={audioRef} src="/cancion.mp3" preload="auto" />
+
+      {/* Flecha */}
       <Box
         sx={{
           position: "absolute",
@@ -107,10 +166,9 @@ const Hero = () => {
           },
         }}
       >
-       <a href="#info" style={{ color: "inherit", textDecoration: "none" }}>
-  <KeyboardArrowDownIcon fontSize="inherit" />
-</a>
-
+        <a href="#info" style={{ color: "inherit", textDecoration: "none" }}>
+          <KeyboardArrowDownIcon fontSize="inherit" />
+        </a>
       </Box>
     </Box>
   );
