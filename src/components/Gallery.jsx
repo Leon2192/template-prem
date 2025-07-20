@@ -39,9 +39,13 @@ const Gallery = () => {
         Galería
       </Typography>
 
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
+      >
         {images.map((src, index) => (
-          <Grid item key={index} xs={12} sm={6} md={3}>
+          <Grid item key={index} xs={12} sm={6} md={4}>
             <Box
               component="img"
               src={src}
@@ -65,60 +69,59 @@ const Gallery = () => {
       </Grid>
 
       <Modal open={open} onClose={handleClose} closeAfterTransition>
-  <Fade in={open}>
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: "rgba(0,0,0,0.85)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999,
-      }}
-    >
-      {/* Botón de cierre */}
-      <Box
-        onClick={handleClose}
-        sx={{
-          position: "absolute",
-          top: 20,
-          right: 30,
-          cursor: "pointer",
-          fontSize: "2rem",
-          color: "#fff",
-          zIndex: 10000,
-          "&:hover": {
-            color: "#d1c4e9",
-          },
-        }}
-        aria-label="Cerrar imagen"
-      >
-        ✖
-      </Box>
+        <Fade in={open}>
+          <Box
+            sx={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "rgba(0,0,0,0.85)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999,
+            }}
+          >
+            {/* Botón de cierre */}
+            <Box
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                top: 20,
+                right: 30,
+                cursor: "pointer",
+                fontSize: "2rem",
+                color: "#fff",
+                zIndex: 10000,
+                "&:hover": {
+                  color: "#d1c4e9",
+                },
+              }}
+              aria-label="Cerrar imagen"
+            >
+              ✖
+            </Box>
 
-      {/* Imagen ampliada */}
-      {selectedImage && (
-        <Box
-          component="img"
-          src={selectedImage}
-          alt="Imagen ampliada"
-          sx={{
-            maxWidth: "90%",
-            maxHeight: "90%",
-            objectFit: "contain",
-            borderRadius: 2,
-            boxShadow: 5,
-          }}
-        />
-      )}
-    </Box>
-  </Fade>
-</Modal>
-
+            {/* Imagen ampliada */}
+            {selectedImage && (
+              <Box
+                component="img"
+                src={selectedImage}
+                alt="Imagen ampliada"
+                sx={{
+                  maxWidth: "90%",
+                  maxHeight: "90%",
+                  objectFit: "contain",
+                  borderRadius: 2,
+                  boxShadow: 5,
+                }}
+              />
+            )}
+          </Box>
+        </Fade>
+      </Modal>
     </Box>
   );
 };

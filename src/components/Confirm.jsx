@@ -42,8 +42,12 @@ const Confirm = () => {
         Esperamos que seas parte de esta gran celebración. ¡Confirmanos tu asistencia!
       </Typography>
 
-      {/* Botón */}
+      {/* Botón con enlace */}
       <Button
+        component="a"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSelY0QMb2Pdi7bOb19tFv-Q42qepyMiIHq9qaPUBfGh_Qr8Lw/viewform?fbzx=4030668355714172330"
+        target="_blank"
+        rel="noopener noreferrer"
         variant="contained"
         sx={{
           borderRadius: 999,
